@@ -2,11 +2,8 @@ package com.robo.project.model;
 
 
 import lombok.*;
-import org.javamoney.moneta.Money;
 
 import javax.persistence.Entity;
-import java.math.BigDecimal;
-import java.util.Currency;
 
 @Setter
 @Getter
@@ -14,7 +11,7 @@ import java.util.Currency;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ExpenseItem extends BaseFinanceAmountEntity {
+public class Expense extends BaseFinanceAmountEntity {
 
    private ExpenseCategory expenseCategory;
 }
