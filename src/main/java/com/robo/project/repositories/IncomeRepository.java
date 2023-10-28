@@ -1,4 +1,7 @@
 package com.robo.project.repositories;
 
-public interface IncomeRepository {
+import com.robo.project.model.Income;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface IncomeRepository extends JpaRepository<Income, Long> {
 }

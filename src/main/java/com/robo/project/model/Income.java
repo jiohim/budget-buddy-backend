@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 @Setter
 @Getter
 @Entity
-public class IncomeItem extends BaseFinanceAmountEntity {
+public class Income extends BaseFinanceAmountEntity {
 
     IncomeCategory incomeCategory;
 }
