@@ -1,4 +1,4 @@
-package com.robo.project.services.jpaimpl;
+package com.robo.project.services;
 
 import java.util.Set;
 

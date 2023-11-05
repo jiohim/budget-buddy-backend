@@ -1,12 +1,9 @@
-package com.robo.project.services.jpaimpl;
+package com.robo.project.services;
 
-import com.robo.project.model.BaseFinanceAmountEntity;
 import com.robo.project.model.Transaction;
-import com.robo.project.model.TransactionType;
 import com.robo.project.repositories.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,16 +13,15 @@ import static com.robo.project.model.TransactionType.EXPENSE;
 import static com.robo.project.model.TransactionType.INCOME;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
-public class BalanceJPAService implements BalanceService{
+public class BalanceServiceImpl implements BalanceService {
 
     private final TransactionRepository transactionRepository;
 
 
     @Override
     public Set<Transaction> findAll() {
-        Set <Transaction> transactions = new HashSet<>();
+        Set<Transaction> transactions = new HashSet<>();
         transactionRepository.findAll().forEach(transactions::add);
         return transactions;
     }
