@@ -1,10 +1,10 @@
-package com.robo.project.services.jpaimpl;
+package com.robo.project.services;
 
 import com.robo.project.model.Transaction;
 
 import java.util.Set;
 
-public interface BalanceService {
+public interface BalanceService extends CrudService<Transaction ,Long>{
 
     Set<Transaction> findAllIncomes();
     Set<Transaction> findAllExpenses();
