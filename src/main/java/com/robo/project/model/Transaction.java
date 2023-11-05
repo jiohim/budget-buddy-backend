@@ -1,20 +1,17 @@
 package com.robo.project.model;
 
 import lombok.*;
+import org.javamoney.moneta.Money;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import java.time.ZonedDateTime;
 
-@Setter
-@Getter
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
+@Value
 @Builder
-public class Transaction extends BaseFinanceAmountEntity {
+public class Transaction {
 
 
-    @Enumerated(EnumType.STRING)
+    private Long id;
+    private Money value;
+    private ZonedDateTime timestamp;
     private TransactionCategory transactionCategory;
 }
