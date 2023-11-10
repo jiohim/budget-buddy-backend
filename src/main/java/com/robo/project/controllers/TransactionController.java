@@ -2,7 +2,7 @@ package com.robo.project.controllers;
 
 
 import com.robo.project.mappers.BalanceRestMapper;
-import com.robo.project.mappers.dto.TransactionDto;
+import com.robo.project.mappers.TransactionDto;
 import com.robo.project.services.BalanceService;
 import com.robo.project.util.Constant;
 import lombok.RequiredArgsConstructor;

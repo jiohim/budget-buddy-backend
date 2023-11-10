@@ -1,4 +1,4 @@
-package com.robo.project.mappers.dto;
+package com.robo.project.mappers;
 
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
 public class TransactionDto {
 
     private Long id;
-    private String moneyValue;
+    private double moneyValue;
     private ZonedDateTime timestamp;
     private String transactionCategory;
 }

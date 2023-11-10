@@ -60,9 +60,10 @@
             <version>42.6.0</version>
         </dependency>
         <dependency>
-            <groupId>org.javamoney.moneta</groupId>
-            <artifactId>moneta-core</artifactId>
+            <groupId>org.javamoney</groupId>
+            <artifactId>moneta</artifactId>
             <version>1.4.2</version>
+            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
