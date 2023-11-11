@@ -24,6 +24,7 @@ public class TransactionEntity {
     private String currencyCode;
     private ZonedDateTime timestamp;
     private String transactionCategory;
+    private String transactionType ;
 
     @Override
     public String toString() {
