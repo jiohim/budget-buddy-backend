@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZonedDateTime;
 import java.util.Comparator;
 
 @RequestMapping("api/v1/transactions")
@@ -51,7 +52,21 @@ public class TransactionController {
                 .map(transaction -> mapper.toDto(transaction))
                 .toList();
         return new ResponseEntity<>(
-               transactions
+                transactions
+                , HttpStatus.OK);
+    }
+
+    @GetMapping("/incomes")
+    @Operation(summary = "Get incomes from: - to: ")
+    public ResponseEntity<?> getIncomes(@RequestBody (required = false) ZonedDateTime from,
+                                        @RequestBody (required = false) ZonedDateTime to) {
+        var transactions = balanceService.findAll()
+                .stream()
+                .sorted(Comparator.comparingLong(Transaction::getId))
+                .map(transaction -> mapper.toDto(transaction))
+                .toList();
+        return new ResponseEntity<>(
+                transactions
                 , HttpStatus.OK);
     }
 }

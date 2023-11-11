@@ -18,4 +18,6 @@ public interface TransactionRepository  {
 
     void deleteById(Long id);
 
+    List<Transaction> findTransactions(String query);
+
 }

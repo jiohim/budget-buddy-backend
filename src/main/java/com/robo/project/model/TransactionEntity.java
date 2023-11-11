@@ -1,12 +1,13 @@
 package com.robo.project.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 
@@ -18,13 +19,18 @@ public class TransactionEntity {
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "amount")
     private double value;
     private String currencyCode;
-    private ZonedDateTime timestamp;
+    private ZonedDateTime dateOfTransaction;
     private String transactionCategory;
     private String transactionType ;
+    @CreationTimestamp
+    private LocalDateTime dateCreated;
+    @UpdateTimestamp
+    private LocalDateTime dateUpdated;
 
     @Override
     public String toString() {
@@ -32,7 +38,7 @@ public class TransactionEntity {
                 "id=" + id +
                 ", value=" + value +
                 ", currencyCode='" + currencyCode + '\'' +
-                ", timestamp=" + timestamp +
+                ", timestamp=" + dateOfTransaction +
                 ", transactionCategory='" + transactionCategory + '\'' +
                 '}';
     }
