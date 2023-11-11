@@ -9,6 +9,6 @@ public class TransactionDto {
 
     private Long id;
     private double moneyValue;
-    private ZonedDateTime timestamp;
+    private ZonedDateTime dateOfTransaction;
     private String transactionCategory;
 }

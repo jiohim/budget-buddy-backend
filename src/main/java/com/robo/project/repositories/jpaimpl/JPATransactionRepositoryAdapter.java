@@ -1,11 +1,13 @@
 package com.robo.project.repositories.jpaimpl;
 
 import com.robo.project.model.Transaction;
+import com.robo.project.model.TransactionEntity;
 import com.robo.project.repositories.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +45,14 @@ public class JPATransactionRepositoryAdapter implements TransactionRepository {
     public void delete(Transaction transaction) {
         repository.delete(mapper.toEntity(transaction));
 
+    }
+    @Override
+    public List<Transaction> findTransactions(String query) {
+        return repository.searchTransactions(query)
+                .stream()
+                .sorted(Comparator.comparingLong(TransactionEntity::getId))
+                .map(transaction -> mapper.toDomain(transaction))
+                .toList();
     }
 
     @Override

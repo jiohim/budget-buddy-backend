@@ -12,6 +12,6 @@ public class Transaction {
 
     private Long id;
     private Money value;
-    private ZonedDateTime timestamp;
+    private ZonedDateTime dateOfTransaction;
     private TransactionCategory transactionCategory;
 }
