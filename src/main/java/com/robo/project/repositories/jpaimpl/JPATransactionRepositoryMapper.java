@@ -12,6 +12,7 @@ public interface JPATransactionRepositoryMapper {
 
     @Mapping(target = "value", expression = "java(transaction.getValue().getNumber().doubleValueExact())")
     @Mapping(target = "currencyCode", expression = "java(transaction.getValue().getCurrency().getCurrencyCode())")
+    @Mapping(target = "transactionType", expression = "java(transaction.getTransactionCategory().getTransactionType().toString())")
     TransactionEntity toEntity(Transaction transaction);
 
 
