@@ -3,18 +3,17 @@ package com.robo.project.controllers;
 
 import com.robo.project.mappers.BalanceRestMapper;
 import com.robo.project.mappers.TransactionDto;
-import com.robo.project.model.Transaction;
 import com.robo.project.services.BalanceService;
 import com.robo.project.util.Constant;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.ZonedDateTime;
-import java.util.Comparator;
 
 @RequestMapping("api/v1/transactions")
 @RestController
@@ -36,7 +35,7 @@ public class TransactionController {
 
     @PostMapping("/add")
     @Operation(summary = "Create a transaction")
-    public ResponseEntity<?> addNewTransaction(@RequestBody TransactionDto transactionDto) {
+    public ResponseEntity<?> addNewTransaction(@RequestBody @Valid TransactionDto transactionDto) {
         var transaction = balanceService.save(mapper.toDomain(transactionDto));
         return new ResponseEntity<>(
                 Constant.TRANSACTION_SAVED
@@ -46,11 +45,7 @@ public class TransactionController {
     @GetMapping
     @Operation(summary = "Get all transactions")
     public ResponseEntity<?> getAllTransactions() {
-        var transactions = balanceService.findAll()
-                .stream()
-                .sorted(Comparator.comparingLong(Transaction::getId))
-                .map(transaction -> mapper.toDto(transaction))
-                .toList();
+        var transactions = balanceService.getSortedAndMappedTransactionDTOs(balanceService.findAll());
         return new ResponseEntity<>(
                 transactions
                 , HttpStatus.OK);
@@ -58,13 +53,9 @@ public class TransactionController {
 
     @GetMapping("/incomes")
     @Operation(summary = "Get incomes from: - to: ")
-    public ResponseEntity<?> getIncomes(@RequestBody (required = false) ZonedDateTime from,
-                                        @RequestBody (required = false) ZonedDateTime to) {
-        var transactions = balanceService.findAll()
-                .stream()
-                .sorted(Comparator.comparingLong(Transaction::getId))
-                .map(transaction -> mapper.toDto(transaction))
-                .toList();
+    public ResponseEntity<?> getIncomes(@RequestBody (required = false)  @Valid ZonedDateTime from,
+                                        @RequestBody (required = false) @Valid ZonedDateTime to) {
+        var transactions = balanceService.getSortedAndMappedTransactionDTOs(balanceService.findAll());
         return new ResponseEntity<>(
                 transactions
                 , HttpStatus.OK);

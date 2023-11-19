@@ -1,10 +1,12 @@
 package com.robo.project.services;
 
-import java.util.Set;
+import com.robo.project.model.Transaction;
+
+import java.util.List;
 
 public interface CrudService <T,ID>{
 
-        Set<T> findAll();
+        List<Transaction> findAll();
 
         T findById(ID id);
 
