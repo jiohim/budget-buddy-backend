@@ -1,13 +1,13 @@
 package com.robo.project.services;
 
+import com.robo.project.mappers.BalanceRestMapper;
+import com.robo.project.mappers.TransactionDto;
 import com.robo.project.model.Transaction;
 import com.robo.project.repositories.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.robo.project.model.TransactionType.EXPENSE;
@@ -18,11 +18,12 @@ import static com.robo.project.model.TransactionType.INCOME;
 public class BalanceServiceImpl implements BalanceService {
 
     private final TransactionRepository transactionRepository;
+    private final BalanceRestMapper mapper;
 
 
     @Override
-    public Set<Transaction> findAll() {
-        Set<Transaction> transactions = new HashSet<>();
+    public List<Transaction> findAll() {
+        List<Transaction> transactions = new ArrayList<>();
         transactionRepository.findAll().forEach(transactions::add);
         return transactions;
     }
@@ -58,7 +59,6 @@ public class BalanceServiceImpl implements BalanceService {
         return transactionRepository.save(object);
     }
 
-    //TODO check if below methods are needed :
 
     @Override
     public void delete(Transaction object) {
@@ -69,4 +69,15 @@ public class BalanceServiceImpl implements BalanceService {
     public void deleteById(Long id) {
         transactionRepository.deleteById(id);
     }
+
+    @Override
+    public List<TransactionDto> getSortedAndMappedTransactionDTOs(List<Transaction> transactions) {
+        return transactions
+                .stream()
+                .sorted(Comparator.comparingLong(Transaction::getId))
+                .map(transaction -> mapper.toDto(transaction))
+                .toList();
+    }
+
+
 }

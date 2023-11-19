@@ -1,5 +1,6 @@
 package com.robo.project.services;
 
+import com.robo.project.mappers.TransactionDto;
 import com.robo.project.model.Transaction;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface BalanceService extends CrudService<Transaction ,Long>{
 
     List<Transaction> searchProducts(String query);
 
-    Set<Transaction> findAll();
+    List<Transaction> findAll();
 
     Transaction findById(Long id);
 
@@ -21,4 +22,6 @@ public interface BalanceService extends CrudService<Transaction ,Long>{
     void delete(Transaction object);
 
     void deleteById(Long id);
+
+    List<TransactionDto> getSortedAndMappedTransactionDTOs(List<Transaction> transactions);
 }
