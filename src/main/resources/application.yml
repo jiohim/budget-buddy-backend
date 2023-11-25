@@ -15,3 +15,13 @@ spring:
       ddl-auto: update # create-drop -- drop after every restart
     open-in-view: false
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 827397972494-svv1rrkfo272qd0tofng97nogjoauddt.apps.googleusercontent.com
+            clientSecret: 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
+            scope:
+              - email
+              - profile

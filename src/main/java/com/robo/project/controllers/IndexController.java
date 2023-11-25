@@ -18,5 +18,9 @@ public class IndexController {
         return ResponseEntity.ok("index");
     }
 
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login";
+    }
 
 }
